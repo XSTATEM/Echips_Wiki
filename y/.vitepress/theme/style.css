@@ -1,0 +1,19 @@
+/* Делаем все элементы чуть более скругленными и воздушными */
+:root {
+  --vp-c-brand: #007aff; /* Основной синий */
+  --vp-c-brand-light: #5ac8fa;
+  --vp-c-brand-dark: #005ecb;
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-hover-border: transparent;
+}
+
+.VPImage {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Красивые кнопки */
+.VPButton.brand {
+  border-radius: 20px;
+  font-weight: 600;
+}
