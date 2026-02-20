@@ -2,5 +2,10 @@ backend:
   name: github
   repo: XSTATEM/Echips_Wiki
   branch: main
+  publish_mode: editorial_workflow # <--- ВОТ ЭТА ВОЛШЕБНАЯ СТРОЧКА
+  
+media_folder: "public"
+public_folder: "/"
+
 
 # (Дальше оставляй media_folder и коллекции как мы писали до этого)
