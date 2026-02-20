@@ -1,0 +1,6 @@
+backend:
+  name: github
+  repo: XSTATEM/Echips_Wiki
+  branch: main
+
+# (Дальше оставляй media_folder и коллекции как мы писали до этого)

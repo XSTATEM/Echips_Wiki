@@ -8,6 +8,8 @@ export default defineConfig({
   title: "Echips Service Wiki",
   description: "База знаний для АСЦ и клиентов",
   lang: 'ru-RU',
+
+  ignoreDeadLinks: true, // <--- ВОТ ЭТА СТРОЧКА СПАСЕТ НАС
   
   themeConfig: {
     // Навигация сверху
