@@ -1,3 +1,6 @@
+<script setup>
+import Comments from '../.vitepress/components/Comments.vue'
+</script>
 ---
 title: Выдача Акта НРП
 description: Пошаговая инструкция по оформлению акта неремонтопригодности в 1С
