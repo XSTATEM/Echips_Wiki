@@ -1,11 +1,15 @@
 backend:
   name: github
-  repo: XSTATEM/Echips_Wiki
+  repo: XSTATEM/Echips_Wiki 
   branch: main
-  publish_mode: editorial_workflow # <--- ВОТ ЭТА ВОЛШЕБНАЯ СТРОЧКА
-  
-media_folder: "public"
-public_folder: "/"
 
+media_folder: "public" 
+public_folder: "/"     
 
-# (Дальше оставляй media_folder и коллекции как мы писали до этого)
+collections:
+  - name: "partner_docs"
+    label: "Инструкции для АСЦ"
+    folder: "partner" 
+    create: true      
+    fields:
+      - {label: "Тело статьи", name: "body", widget: "markdown"}
