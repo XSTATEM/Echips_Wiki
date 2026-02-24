@@ -1,8 +1,27 @@
+---
+title: MainMenu
+description: ''
+blocks:
+  - type: button_block
+    text: youtube
+    link: youtube.com
+    color: sponsor
+  - type: gallery_block
+    images:
+      - url: /images/nrp-2.png
+        alt: ''
+      - url: /images/nrp-4.png
+        alt: ''
+      - url: /images/nrp-5.png
+        alt: ''
+---
+
 # Партнерский раздел (АСЦ)
 
 Добро пожаловать в закрытую базу знаний для авторизованных сервисных центров.
 
 ## Быстрые ссылки
+
 - [📄 Оформление заказа в 1С](/partner/create-order)
 - [📦 Заказ запчастей (скоро)](/partner/parts-request)
 - [🛠 Регламенты ремонта (скоро)](/partner/regulations)
