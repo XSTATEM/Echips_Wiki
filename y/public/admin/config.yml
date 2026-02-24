@@ -40,12 +40,17 @@ collections:
             name: "callout_block"
             widget: "object"
             fields:
-              - label: "Тип"
+              - label: "Тип уведомления"
                 name: "type"
                 widget: "select"
-                options: ["tip", "info", "warning", "danger"]
+                # Используем простой список, он не крашит интерфейс
+                options: 
+                  - { label: "💡 Совет", value: "tip" }
+                  - { label: "ℹ️ Инфо", value: "info" }
+                  - { label: "⚠️ Предупреждение", value: "warning" }
+                  - { label: "🔥 Опасно", value: "danger" }
                 default: "tip"
-              - {label: "Заголовок", name: "title", widget: "string", required: false}
+              - {label: "Заголовок (необязательно)", name: "title", widget: "string", required: false}
               - {label: "Текст совета", name: "content", widget: "markdown"}
 
           - label: "🎥 Видео (YouTube/Ссылка)"
