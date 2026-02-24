@@ -3,6 +3,7 @@ backend:
   repo: XSTATEM/Echips_Wiki
   branch: main
   base_url: https://echips-auth.uzakovv41.workers.dev
+  auth_endpoint: auth
 
 media_folder: "public/images" 
 public_folder: "/images"     
