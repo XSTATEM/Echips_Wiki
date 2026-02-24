@@ -16,12 +16,6 @@ export default defineConfig({
       provider: 'local'
     },
 
-    // 2. ССЫЛКА НА РЕДАКТИРОВАНИЕ
-    editLink: {
-      pattern: 'https://github.com/XSTATEM/Echips_Wiki/edit/main/y/:path',
-      text: 'Править страницу на GitHub'
-    },
-
     // 3. ПРАВОЕ МЕНЮ (Оглавление)
     outline: {
       label: 'На этой странице',
