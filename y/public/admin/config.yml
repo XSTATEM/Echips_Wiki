@@ -36,14 +36,15 @@ collections:
               - {label: "Текст шага", name: "text", widget: "markdown"}
               - {label: "Картинка", name: "image", widget: "image", required: false}
 
-          - label: "⚠️ Важное / Совет"
-            name: "callout_block"
-            widget: "object"
-            fields:
+          - - label: "⚠️ Важное / Совет"
+              name: "callout_block"
+              widget: "object"
+              fields:
               - label: "Тип уведомления"
                 name: "type"
                 widget: "select"
-                # Используем простой список, он не крашит интерфейс
+                # Это заставит админку показать меню, а не кнопки
+                display: "select" 
                 options: 
                   - { label: "💡 Совет", value: "tip" }
                   - { label: "ℹ️ Инфо", value: "info" }
@@ -66,5 +67,35 @@ collections:
             fields:
               - {label: "Название файла", name: "label", widget: "string"}
               - {label: "Ссылка или файл", name: "file", widget: "file"}
+
+          - label: "📊 Таблица"
+            name: "table_block"
+            widget: "object"
+            fields:
+              - {label: "Заголовок таблицы", name: "caption", widget: "string", required: false}
+              - {label: "Данные (Markdown формат)", name: "table_data", widget: "markdown", help: "Создайте таблицу здесь или скопируйте из Excel"}
+
+          - label: "🖼️ Галерея изображений"
+            name: "gallery_block"
+            widget: "object"
+            fields:
+              - label: "Фотографии"
+                name: "images"
+                widget: "list"
+                fields:
+                  - {label: "Изображение", name: "url", widget: "image"}
+                  - {label: "Подпись", name: "alt", widget: "string", required: false}
+
+          - label: "🔘 Кнопка-ссылка"
+            name: "button_block"
+            widget: "object"
+            fields:
+              - {label: "Текст на кнопке", name: "text", widget: "string"}
+              - {label: "Ссылка", name: "link", widget: "string"}
+              - label: "Цвет"
+                name: "color"
+                widget: "select"
+                options: ["brand", "alt", "sponsor"]
+                default: "brand"
 
       - {label: "Весь текст (Markdown)", name: "body", widget: "markdown", required: false}
