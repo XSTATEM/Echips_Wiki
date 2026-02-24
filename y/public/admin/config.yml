@@ -2,7 +2,7 @@ backend:
   name: github
   repo: XSTATEM/Echips_Wiki
   branch: main
-  base_url: https://echips-auth.uzakovv41.workers.dev # Твой личный сервер
+  base_url: https://echips-auth.uzakovv41.workers.dev
   auth_endpoint: auth
 
 media_folder: "public/images" 
