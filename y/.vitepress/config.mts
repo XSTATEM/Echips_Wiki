@@ -1,70 +1,35 @@
-
 import { defineConfig } from 'vitepress'
 
-
-
-// https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Echips Service Wiki",
-  description: "База знаний для АСЦ и клиентов",
-  lang: 'ru-RU',
-
-  ignoreDeadLinks: true, // <--- ВОТ ЭТА СТРОЧКА СПАСЕТ НАС
-  
+  title: "Echips Wiki",
+  description: "База знаний для АСЦ",
   themeConfig: {
-    // Навигация сверху
+    // Твоё меню (nav)
     nav: [
       { text: 'Главная', link: '/' },
-      { text: 'Клиентам', link: '/client/' },
-      { text: 'Партнерам (АСЦ)', link: '/partner/' },
+      { text: 'Инструкции', link: '/partner/' }
     ],
 
-    // Боковое меню
-    sidebar: {
-      // Меню для раздела Партнеров
-      '/partner/': [
-        {
-          text: '⚡ Быстрый старт',
-          items: [
-            { text: '➕ СОЗДАТЬ ЗАКАЗ', link: '/partner/new-order' },
-            { text: 'Главная панель', link: '/partner/' },
-          ]
-        },
-        {
-          text: '💻 Инструкции 1С',
-          items: [
-            { text: 'Оформление заказа', link: '/partner/create-order' },
-            { text: 'Заказ запчастей', link: '/partner/parts-request' },
-          ]
-        },
-        {
-          text: '📜 Регламенты',
-          items: [
-            { text: 'Акт НРП', link: '/partner/nrp-act' },
-            { text: 'Подменный фонд', link: '/partner/substitution' },
-          ]
-        }
-      ],
-
-      // Меню для Клиентов
-      '/client/': [
-        {
-          text: 'Информация',
-          items: [
-            { text: 'Гарантия', link: '/client/' },
-            { text: 'Поддержка', link: '/client/support' }
-          ]
-        }
-      ]
+    // 1. ПОИСК (Добавь запятую перед этим блоком, если сверху что-то есть!)
+    search: {
+      provider: 'local'
     },
 
+    // 2. ССЫЛКА НА РЕДАКТИРОВАНИЕ
+    editLink: {
+      pattern: 'https://github.com/XSTATEM/Echips_Wiki/edit/main/y/:path',
+      text: 'Править страницу на GitHub'
+    },
+
+    // 3. ПРАВОЕ МЕНЮ (Оглавление)
+    outline: {
+      label: 'На этой странице',
+      level: [2, 3]
+    },
+
+    // Социальные ссылки
     socialLinks: [
-      // Можно добавить ссылку на Telegram
-    ],
-    
-    footer: {
-      message: 'Сервисный департамент Echips',
-      copyright: '© 2026'
-    }
+      { icon: 'github', link: 'https://github.com/XSTATEM/Echips_Wiki' }
+    ]
   }
 })

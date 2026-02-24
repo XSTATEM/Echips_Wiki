@@ -1,11 +1,16 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vitepress'
 
 const route = useRoute()
 const container = ref(null)
 
-onMounted(() => {
+const loadGiscus = () => {
+  if (!container.value) return
+  
+  // Очищаем контейнер перед новой загрузкой, чтобы комментарии не дублировались
+  container.value.innerHTML = ''
+  
   const script = document.createElement('script')
   script.src = 'https://giscus.app/client.js'
   script.setAttribute('data-repo', 'XSTATEM/Echips_Wiki')
@@ -17,20 +22,26 @@ onMounted(() => {
   script.setAttribute('data-reactions-enabled', '1')
   script.setAttribute('data-emit-metadata', '0')
   script.setAttribute('data-input-position', 'top')
-  
-  // Меняем тему на адаптивную! Теперь она сама будет светлой или темной
   script.setAttribute('data-theme', 'preferred_color_scheme') 
-  
   script.setAttribute('data-lang', 'ru')
   script.crossOrigin = 'anonymous'
   script.async = true
   
   container.value.appendChild(script)
+}
+
+onMounted(() => {
+  loadGiscus()
+})
+
+// Следим за сменой пути: если перешли в другую статью — перезагружаем Giscus
+watch(() => route.path, () => {
+  loadGiscus()
 })
 </script>
 
 <template>
-  <div class="comments-wrapper" :key="route.path">
+  <div class="comments-wrapper">
     <div class="comments-header">
       💬 Обсуждение регламента
     </div>
@@ -39,14 +50,13 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Наводим красоту на блок комментариев */
 .comments-wrapper {
   margin-top: 60px;
-  background-color: var(--vp-c-bg-soft); /* Мягкий фон, подстраивается под тему VitePress */
-  border-radius: 16px; /* Современные скругленные углы */
+  background-color: var(--vp-c-bg-soft);
+  border-radius: 16px;
   padding: 30px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04); /* Очень легкая "эппловская" тень */
-  border: 1px solid var(--vp-c-divider); /* Тонкая аккуратная рамка */
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--vp-c-divider);
 }
 
 .comments-header {
@@ -60,6 +70,6 @@ onMounted(() => {
 }
 
 .giscus-container {
-  min-height: 300px; /* Чтобы страница не "прыгала", пока комментарии грузятся */
+  min-height: 300px;
 }
 </style>
