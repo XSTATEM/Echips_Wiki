@@ -1,4 +1,3 @@
-
 backend:
   name: github
   repo: XSTATEM/Echips_Wiki
@@ -9,48 +8,58 @@ media_folder: "y/public/images"
 public_folder: "/images"
 
 collections:
-  # --- ПЕРВАЯ КОЛЛЕКЦИЯ: ИНСТРУКЦИИ ---
   - name: "partner_docs"
     label: "Инструкции для АСЦ"
     folder: "y/partner"
     create: true
     fields:
-      - {label: "ID/Название файла", name: "title", widget: "string"}
-      - {label: "Заголовок страницы", name: "page_title", widget: "string"}
+      - {label: "Заголовок статьи", name: "title", widget: "string"}
+      - {label: "Описание для поиска", name: "description", widget: "text", required: false}
+      # Скрытое поле, чтобы комментарии всегда были включены
+      - {label: "Комментарии", name: "show_comments", widget: "hidden", default: true}
+      
       - label: "Конструктор контента"
         name: "blocks"
         widget: "list"
         types:
-          - label: "Шаг инструкции"
+          - label: "📝 Простой текст"
+            name: "text_block"
+            widget: "object"
+            fields:
+              - {label: "Текст", name: "content", widget: "markdown"}
+
+          - label: "🚀 Шаг инструкции"
             name: "step_block"
             widget: "object"
             fields:
               - {label: "Заголовок шага", name: "h", widget: "string"}
               - {label: "Текст шага", name: "text", widget: "markdown"}
               - {label: "Картинка", name: "image", widget: "image", required: false}
-          - label: "Простой текст"
-            name: "text_block"
+
+          - label: "⚠️ Важное / Совет"
+            name: "callout_block"
             widget: "object"
             fields:
-              - {label: "Текст", name: "content", widget: "markdown"}
-      - {label: "Весь текст (для VitePress)", name: "body", widget: "markdown"}
+              - label: "Тип"
+                name: "type"
+                widget: "select"
+                options: ["tip", "info", "warning", "danger"]
+                default: "tip"
+              - {label: "Заголовок", name: "title", widget: "string", required: false}
+              - {label: "Текст совета", name: "content", widget: "markdown"}
 
-  # --- ВТОРАЯ КОЛЛЕКЦИЯ: СТАТЬИ ---
-  - name: "articles"
-    label: "Общие статьи"
-    folder: "y/articles" # Создай такую папку в VS Code, если её нет
-    create: true
-    fields:
-      - {label: "Заголовок", name: "title", widget: "string"}
-      - {label: "Дата", name: "date", widget: "datetime"}
-      - {label: "Текст статьи", name: "body", widget: "markdown"}
+          - label: "🎥 Видео (YouTube/Ссылка)"
+            name: "video_block"
+            widget: "object"
+            fields:
+              - {label: "Ссылка на видео", name: "url", widget: "string"}
+              - {label: "Подпись", name: "caption", widget: "string", required: false}
 
-  # --- ТРЕТЬЯ КОЛЛЕКЦИЯ: ФАЙЛЫ ---
-  - name: "files_list"
-    label: "Файлы и драйверы"
-    folder: "y/files"
-    create: true
-    fields:
-      - {label: "Название файла", name: "title", widget: "string"}
-      - {label: "Ссылка на скачивание", name: "file_url", widget: "string"}
-      - {label: "Описание", name: "body", widget: "markdown"}
+          - label: "📎 Файл для скачивания"
+            name: "file_block"
+            widget: "object"
+            fields:
+              - {label: "Название файла", name: "label", widget: "string"}
+              - {label: "Ссылка или файл", name: "file", widget: "file"}
+
+      - {label: "Весь текст (Markdown)", name: "body", widget: "markdown", required: false}
