@@ -11,8 +11,18 @@ public_folder: "/images"
 collections:
   - name: "partner_docs"
     label: "Инструкции для АСЦ"
-    folder: "y/partner" # Добавляем 'y/', чтобы путь был точным
+    folder: "y/partner"
     create: true
+    identifier_field: title
     fields:
-      - {label: "Заголовок", name: "title", widget: "string"}
-      - {label: "Тело статьи", name: "body", widget: "markdown"}
+      - {label: "ID (для ссылки)", name: "title", widget: "string"}
+      - {label: "Заголовок страницы", name: "page_title", widget: "string"}
+      - {label: "Описание", name: "description", widget: "text", required: false}
+      - label: "Шаги инструкции"
+        name: "steps"
+        widget: "list"
+        summary: "{{fields.step_title}}"
+        fields:
+          - {label: "Заголовок шага", name: "step_title", widget: "string"}
+          - {label: "Контент шага", name: "step_content", widget: "markdown"}
+      - {label: "Весь текст (Markdown)", name: "body", widget: "markdown"}
