@@ -1,10 +1,11 @@
 backend:
   name: github
-  repo: XSTATEM/Echips_Wiki 
+  repo: XSTATEM/Echips_Wiki
   branch: main
+  base_url: https://sveltia-cms-auth.pages.dev 
 
-media_folder: "public" 
-public_folder: "/"     
+media_folder: "public/images" 
+public_folder: "/images"     
 
 collections:
   - name: "partner_docs"
