@@ -11,7 +11,8 @@ public_folder: "/images"
 collections:
   - name: "partner_docs"
     label: "Инструкции для АСЦ"
-    folder: "partner" 
-    create: true      
+    folder: "y/partner" # Добавляем 'y/', чтобы путь был точным
+    create: true
     fields:
+      - {label: "Заголовок", name: "title", widget: "string"}
       - {label: "Тело статьи", name: "body", widget: "markdown"}
