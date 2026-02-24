@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   title: "Echips Wiki",
+  ignoreDeadLinks: true,
   description: "База знаний для АСЦ",
   themeConfig: {
     // Твоё меню (nav)

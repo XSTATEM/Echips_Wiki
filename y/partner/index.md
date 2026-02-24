@@ -14,6 +14,9 @@ blocks:
         alt: ''
       - url: /images/nrp-5.png
         alt: ''
+  - type: callout_block
+    content: опраопрапроапоапор
+    title: раоепао
 ---
 
 # Партнерский раздел (АСЦ)
