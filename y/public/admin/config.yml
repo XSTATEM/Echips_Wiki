@@ -2,7 +2,8 @@ backend:
   name: github
   repo: XSTATEM/Echips_Wiki
   branch: main
-  base_url: https://sveltia-cms-auth.pages.dev 
+  auth_type: pkce
+  app_id: Ov23liodUqhhQgnn2DJx
 
 media_folder: "public/images" 
 public_folder: "/images"     
