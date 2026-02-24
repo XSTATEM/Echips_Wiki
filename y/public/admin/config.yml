@@ -8,21 +8,58 @@ backend:
 media_folder: "public/images" 
 public_folder: "/images"     
 
+backend:
+  name: github
+  repo: XSTATEM/Echips_Wiki
+  branch: main
+  base_url: https://echips-auth.uzakovv41.workers.dev
+
+media_folder: "y/public/images"
+public_folder: "/images"
+
 collections:
+  # --- ПЕРВАЯ КОЛЛЕКЦИЯ: ИНСТРУКЦИИ ---
   - name: "partner_docs"
     label: "Инструкции для АСЦ"
     folder: "y/partner"
     create: true
-    identifier_field: title
     fields:
-      - {label: "ID (для ссылки)", name: "title", widget: "string"}
+      - {label: "ID/Название файла", name: "title", widget: "string"}
       - {label: "Заголовок страницы", name: "page_title", widget: "string"}
-      - {label: "Описание", name: "description", widget: "text", required: false}
-      - label: "Шаги инструкции"
-        name: "steps"
+      - label: "Конструктор контента"
+        name: "blocks"
         widget: "list"
-        summary: "{{fields.step_title}}"
-        fields:
-          - {label: "Заголовок шага", name: "step_title", widget: "string"}
-          - {label: "Контент шага", name: "step_content", widget: "markdown"}
-      - {label: "Весь текст (Markdown)", name: "body", widget: "markdown"}
+        types:
+          - label: "Шаг инструкции"
+            name: "step_block"
+            widget: "object"
+            fields:
+              - {label: "Заголовок шага", name: "h", widget: "string"}
+              - {label: "Текст шага", name: "text", widget: "markdown"}
+              - {label: "Картинка", name: "image", widget: "image", required: false}
+          - label: "Простой текст"
+            name: "text_block"
+            widget: "object"
+            fields:
+              - {label: "Текст", name: "content", widget: "markdown"}
+      - {label: "Весь текст (для VitePress)", name: "body", widget: "markdown"}
+
+  # --- ВТОРАЯ КОЛЛЕКЦИЯ: СТАТЬИ ---
+  - name: "articles"
+    label: "Общие статьи"
+    folder: "y/articles" # Создай такую папку в VS Code, если её нет
+    create: true
+    fields:
+      - {label: "Заголовок", name: "title", widget: "string"}
+      - {label: "Дата", name: "date", widget: "datetime"}
+      - {label: "Текст статьи", name: "body", widget: "markdown"}
+
+  # --- ТРЕТЬЯ КОЛЛЕКЦИЯ: ФАЙЛЫ ---
+  - name: "files_list"
+    label: "Файлы и драйверы"
+    folder: "y/files"
+    create: true
+    fields:
+      - {label: "Название файла", name: "title", widget: "string"}
+      - {label: "Ссылка на скачивание", name: "file_url", widget: "string"}
+      - {label: "Описание", name: "body", widget: "markdown"}
