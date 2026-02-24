@@ -1,9 +1,9 @@
 import { h } from 'vue'
-import { useRoute } from 'vitepress'
+import { useRoute, useData } from 'vitepress' // <-- Добавили useData
 import DefaultTheme from 'vitepress/theme'
-import StepGuide from '../../components/StepGuide.vue'
+import StepGuide from '../../components/StepGuide.vue' 
 import NewOrder from '../../components/NewOrder.vue'
-import Comments from '../components/Comments.vue'
+import Comments from '../components/Comments.vue' // <-- Твой правильный путь
 import BlocksRenderer from '../../components/BlocksRenderer.vue'
 import './style.css'
 
@@ -18,12 +18,20 @@ export default {
   },
   Layout: () => {
     const route = useRoute()
+    const { frontmatter } = useData() // <-- Достаем настройки текущей страницы
+
     return h(DefaultTheme.Layout, null, {
-      // Это выводит твои блоки из админки сверху
-      'doc-before': () => h(BlocksRenderer, { key: route.path + '-blocks' }),
-      
-      // А ВОТ ЭТО ЖЕЛЕЗОБЕТОННО ВЫВОДИТ КОММЕНТАРИИ ВНИЗУ КАЖДОЙ СТРАНИЦЫ
-      'doc-after': () => h(Comments, { key: route.path + '-comments' }) 
+      'doc-before': () => {
+        // Прячем блоки-конструктор на главной странице
+        if (frontmatter.value.layout === 'home') return null
+        return h(BlocksRenderer, { key: route.path + '-blocks' })
+      },
+      'doc-after': () => {
+        // Прячем комментарии на главной странице 
+        // ИЛИ если в статье явно написано show_comments: false
+        if (frontmatter.value.layout === 'home' || frontmatter.value.show_comments === false) return null
+        return h(Comments, { key: route.path + '-comments' })
+      }
     })
   }
 }
