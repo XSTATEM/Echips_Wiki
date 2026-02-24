@@ -36,23 +36,23 @@ collections:
               - {label: "Текст шага", name: "text", widget: "markdown"}
               - {label: "Картинка", name: "image", widget: "image", required: false}
 
-          - - label: "⚠️ Важное / Совет"
-              name: "callout_block"
-              widget: "object"
-              fields:
-              - label: "Тип уведомления"
-                name: "type"
-                widget: "select"
-                # Это заставит админку показать меню, а не кнопки
-                display: "select" 
-                options: 
-                  - { label: "💡 Совет", value: "tip" }
-                  - { label: "ℹ️ Инфо", value: "info" }
-                  - { label: "⚠️ Предупреждение", value: "warning" }
-                  - { label: "🔥 Опасно", value: "danger" }
-                default: "tip"
-              - {label: "Заголовок (необязательно)", name: "title", widget: "string", required: false}
-              - {label: "Текст совета", name: "content", widget: "markdown"}
+          - label: "⚠️ Важное / Совет"
+            name: "callout_block"
+            widget: "object"
+            fields:
+            - label: "Тип уведомления"
+              name: "type"
+              widget: "select"
+              # Это заставит админку показать меню, а не кнопки
+              display: "select" 
+              options: 
+                - { label: "💡 Совет", value: "tip" }
+                - { label: "ℹ️ Инфо", value: "info" }
+                - { label: "⚠️ Предупреждение", value: "warning" }
+                - { label: "🔥 Опасно", value: "danger" }
+              default: "tip"
+            - {label: "Заголовок (необязательно)", name: "title", widget: "string", required: false}
+            - {label: "Текст совета", name: "content", widget: "markdown"}
 
           - label: "🎥 Видео (YouTube/Ссылка)"
             name: "video_block"
