@@ -1,19 +1,11 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import { useRoute } from 'vitepress'
+import { ref, onMounted } from 'vue'
 
-const route = useRoute()
 const isAuthorized = ref(false)
 const login = ref('')
 const password = ref('')
 const error = ref('')
 const loading = ref(false)
-
-// МАГИЯ ЗДЕСЬ: Проверяем, начинается ли адрес страницы с /partner/
-// Если у тебя папка называется иначе (например, /service/), поменяй слово здесь:
-const isProtected = computed(() => {
-  return route.path.startsWith('/partner/') 
-})
 
 onMounted(() => {
   if (localStorage.getItem('echips_wiki_token')) {
@@ -47,12 +39,12 @@ async function handleLogin() {
 </script>
 
 <template>
-  <div v-if="isProtected && !isAuthorized" class="login-overlay">
+  <div v-if="!isAuthorized" class="login-overlay">
     <div class="login-card">
       <h2>Вход для АСЦ</h2>
-      <p>Пожалуйста, авторизуйтесь для доступа к регламентам</p>
+      <p>Используйте учетные данные от 1С</p>
       
-      <input v-model="login" type="text" placeholder="Логин" @keyup.enter="handleLogin" />
+      <input v-model="login" type="text" placeholder="Логин 1С" @keyup.enter="handleLogin" />
       <input v-model="password" type="password" placeholder="Пароль" @keyup.enter="handleLogin" />
       
       <button @click="handleLogin" :disabled="loading">
@@ -67,27 +59,11 @@ async function handleLogin() {
 </template>
 
 <style scoped>
-.login-overlay {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: var(--vp-c-bg); z-index: 999;
-  display: flex; align-items: center; justify-content: center;
-}
-.login-card {
-  width: 100%; max-width: 350px; padding: 40px;
-  background: var(--vp-c-bg-soft); border-radius: 20px;
-  border: 1px solid var(--vp-c-divider); text-align: center;
-}
-input {
-  width: 100%; padding: 12px; margin: 10px 0;
-  border-radius: 8px; border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg); color: var(--vp-c-text-1);
-}
-button {
-  width: 100%; padding: 12px; margin-top: 20px;
-  background: var(--vp-c-brand); color: white;
-  border-radius: 8px; font-weight: 600;
-  cursor: pointer;
-}
+/* Стили оставляем те же, что и были */
+.login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--vp-c-bg); z-index: 999; display: flex; align-items: center; justify-content: center; }
+.login-card { width: 100%; max-width: 350px; padding: 40px; background: var(--vp-c-bg-soft); border-radius: 20px; border: 1px solid var(--vp-c-divider); text-align: center; }
+input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid var(--vp-c-divider); background: var(--vp-c-bg); color: var(--vp-c-text-1); }
+button { width: 100%; padding: 12px; margin-top: 20px; background: var(--vp-c-brand); color: white; border-radius: 8px; font-weight: 600; cursor: pointer; }
 button:disabled { opacity: 0.7; cursor: not-allowed; }
 .error-msg { color: var(--vp-c-danger); margin-top: 15px; font-size: 0.9rem; }
 </style>
