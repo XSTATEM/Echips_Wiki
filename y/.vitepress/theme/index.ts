@@ -1,10 +1,11 @@
 import { h } from 'vue'
-import { useRoute, useData } from 'vitepress' // <-- Добавили useData
+import { useRoute, useData } from 'vitepress' 
 import DefaultTheme from 'vitepress/theme'
 import StepGuide from '../../components/StepGuide.vue' 
 import NewOrder from '../../components/NewOrder.vue'
-import Comments from '../components/Comments.vue' // <-- Твой правильный путь
+import Comments from '../components/Comments.vue' 
 import BlocksRenderer from '../../components/BlocksRenderer.vue'
+import LoginGuard from '../../components/LoginGuard.vue'
 import './style.css'
 
 export default {
@@ -15,23 +16,23 @@ export default {
     app.component('NewOrder', NewOrder)
     app.component('Comments', Comments)
     app.component('BlocksRenderer', BlocksRenderer)
+    app.component('LoginGuard', LoginGuard)
   },
   Layout: () => {
     const route = useRoute()
-    const { frontmatter } = useData() // <-- Достаем настройки текущей страницы
+    const { frontmatter } = useData()
 
-    return h(DefaultTheme.Layout, null, {
-      'doc-before': () => {
-        // Прячем блоки-конструктор на главной странице
-        if (frontmatter.value.layout === 'home') return null
-        return h(BlocksRenderer, { key: route.path + '-blocks' })
-      },
-      'doc-after': () => {
-        // Прячем комментарии на главной странице 
-        // ИЛИ если в статье явно написано show_comments: false
-        if (frontmatter.value.layout === 'home' || frontmatter.value.show_comments === false) return null
-        return h(Comments, { key: route.path + '-comments' })
-      }
-    })
+    return h(LoginGuard, null, {
+      default: () => h(DefaultTheme.Layout, null, {
+        'doc-before': () => {
+          if (frontmatter.value.layout === 'home') return null
+          return h(BlocksRenderer, { key: route.path + '-blocks' })
+        },
+        'doc-after': () => {
+          if (frontmatter.value.layout === 'home' || frontmatter.value.show_comments === false) return null
+          return h(Comments, { key: route.path + '-comments' })
+        }
+      })
+    })  
   }
 }
