@@ -1,14 +1,21 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+import { useRoute } from 'vitepress'
 
+const route = useRoute()
 const isAuthorized = ref(false)
 const login = ref('')
 const password = ref('')
 const error = ref('')
 const loading = ref(false)
 
+// МАГИЯ ЗДЕСЬ: Проверяем, начинается ли адрес страницы с /partner/
+// Если у тебя папка называется иначе (например, /service/), поменяй слово здесь:
+const isProtected = computed(() => {
+  return route.path.startsWith('/partner/') 
+})
+
 onMounted(() => {
-  // Проверяем, есть ли уже сохраненный ключ в браузере
   if (localStorage.getItem('echips_wiki_token')) {
     isAuthorized.value = true
   }
@@ -29,7 +36,7 @@ async function handleLogin() {
       localStorage.setItem('echips_wiki_token', token)
       isAuthorized.value = true
     } else {
-      error.value = 'Неверный логин или пароль от 1С'
+      error.value = 'Неверный логин или пароль'
     }
   } catch (e) {
     error.value = 'Сервер авторизации временно недоступен'
@@ -40,13 +47,12 @@ async function handleLogin() {
 </script>
 
 <template>
-  <div v-if="!isAuthorized" class="login-overlay">
+  <div v-if="isProtected && !isAuthorized" class="login-overlay">
     <div class="login-card">
-      <img src="/logo.png" alt="Echips" class="logo" />
-      <h2>Вход в базу знаний</h2>
-      <p>Используйте свои учетные данные от 1С</p>
+      <h2>Вход для АСЦ</h2>
+      <p>Пожалуйста, авторизуйтесь для доступа к регламентам</p>
       
-      <input v-model="login" type="text" placeholder="Логин 1С" @keyup.enter="handleLogin" />
+      <input v-model="login" type="text" placeholder="Логин" @keyup.enter="handleLogin" />
       <input v-model="password" type="password" placeholder="Пароль" @keyup.enter="handleLogin" />
       
       <button @click="handleLogin" :disabled="loading">
@@ -56,6 +62,7 @@ async function handleLogin() {
       <p v-if="error" class="error-msg">{{ error }}</p>
     </div>
   </div>
+  
   <slot v-else />
 </template>
 
@@ -79,7 +86,8 @@ button {
   width: 100%; padding: 12px; margin-top: 20px;
   background: var(--vp-c-brand); color: white;
   border-radius: 8px; font-weight: 600;
+  cursor: pointer;
 }
+button:disabled { opacity: 0.7; cursor: not-allowed; }
 .error-msg { color: var(--vp-c-danger); margin-top: 15px; font-size: 0.9rem; }
-.logo { width: 120px; margin-bottom: 20px; }
 </style>
