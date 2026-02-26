@@ -77,7 +77,6 @@ button:hover { background: var(--vp-c-brand-dark); }
 button:disabled { opacity: 0.7; cursor: not-allowed; }
 .error-msg { color: var(--vp-c-danger); margin-top: 15px; font-size: 0.9rem; }
 
-/* Стили для новых элементов */
 .warning-box {
   background: var(--vp-c-warning-soft, #fffbdf);
   color: var(--vp-c-warning-text, #b28a00);
