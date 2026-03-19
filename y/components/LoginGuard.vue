@@ -47,9 +47,9 @@ async function handleLogin() {
         Внимание! Эта база знаний предназначена <b>только</b> для Авторизованных Сервисных Центров (АСЦ).
       </div>
       
-      <p>Для доступа используйте логин и пароль от 1С</p>
+      <p>Для доступа используйте логин и пароль</p>
       
-      <input v-model="login" type="text" placeholder="Логин 1С" @keyup.enter="handleLogin" />
+      <input v-model="login" type="text" placeholder="Логин" @keyup.enter="handleLogin" />
       <input v-model="password" type="password" placeholder="Пароль" @keyup.enter="handleLogin" />
       
       <button @click="handleLogin" :disabled="loading">
@@ -58,9 +58,10 @@ async function handleLogin() {
       
       <p v-if="error" class="error-msg">{{ error }}</p>
 
-      <a href="https://echips-wiki.pages.dev/" class="public-link">
-        ← Я обычный клиент, мне нужна поддержка
+      <a href="https://echipswiki.ru/" class="public-link">
+         Я обычный клиент, мне нужна поддержка
       </a>
+
     </div>
   </div>
   

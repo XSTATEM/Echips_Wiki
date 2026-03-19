@@ -10,9 +10,6 @@ hero:
     - theme: brand
       text: Я Партнер (АСЦ)
       link: /partner/
-    - theme: alt
-      text: Я Клиент
-      link: /client/
 
 features:
   - title: Стандарты диагностики
